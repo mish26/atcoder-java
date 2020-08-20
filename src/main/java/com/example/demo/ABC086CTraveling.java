@@ -1,7 +1,5 @@
 package com.example.demo;
 
-import javax.swing.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,7 +15,7 @@ public class ABC086CTraveling {
         int elementCount = n * 3;
 
         Integer[] integers = new Integer[elementCount];
-        IntStream.range(0, elementCount - 1).forEach(i ->
+        IntStream.range(0, elementCount).forEach(i ->
                 integers[i] = sc.nextInt());
 
         Map<Integer, List<Integer>> map = new HashMap<>();
@@ -50,9 +48,9 @@ public class ABC086CTraveling {
 
         int tmpTime = 0;
         int tmpSumXY = 0;
+        Map<Boolean,Boolean> tmpBooleanMap = new HashMap<>();
         boolean tmpTimeIsEnv = false;
         boolean tmpSumXYIsEnv = false;
-        int j = 0;
 
         for (Map.Entry<Integer, List<Integer>> entry : map.entrySet()) {
 //            System.out.println(entry.getKey() + " : " + entry.getValue());
@@ -80,19 +78,34 @@ public class ABC086CTraveling {
             // 偶数、奇数の比較
             // 2
             // 5 1 1
-            // 100 1 1
+            // 10 2 0
             // No
-            // 距離的にはたどり着けるが、奇数の都合で移動できない
-            // if (tmpTimeIsEnv)
+            // 距離的にはたどり着けるが、偶奇の都合で移動できない
+            if ((timeIsEnv == tmpTimeIsEnv && sumXYIsEnv == tmpSumXYIsEnv) || (timeIsEnv == tmpSumXYIsEnv && sumXYIsEnv == tmpTimeIsEnv)) {
+
+            } else {
+                System.out.println("No");
+                return;
+            }
+/*
+            Map<Boolean,Boolean> booleanMap = new HashMap<>();
+            booleanMap.put(timeIsEnv, sumXYIsEnv);
+
+            if (!booleanMap.equals(tmpBooleanMap)) {
+                if (!(Objects.equals(timeIsEnv,tmpSumXYIsEnv) && Objects.equals(sumXYIsEnv,tmpTimeIsEnv))) {
+                    System.out.println("No");
+                    return;
+                }
+            }*/
 
             // 前回の値の一時保存
             tmpTime = time;
-            tmpSumXY = tmpSumXY;
+            tmpSumXY = sumXY;
+
             tmpTimeIsEnv = (time % 2 == 0);
             tmpSumXYIsEnv = (sumXY % 2 == 0);
-            j++;
+//            tmpBooleanMap.put(tmpTimeIsEnv, tmpSumXYIsEnv);
         }
-
 
         System.out.println("Yes");
     }
