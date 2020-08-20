@@ -80,7 +80,14 @@ public class ABC086CTraveling {
             // 5 1 1
             // 10 2 0
             // No
-            // 距離的にはたどり着けるが、奇数の都合で移動できない
+            // 距離的にはたどり着けるが、偶奇の都合で移動できない
+            if ((timeIsEnv == tmpTimeIsEnv && sumXYIsEnv == tmpSumXYIsEnv) || (timeIsEnv == tmpSumXYIsEnv && sumXYIsEnv == tmpTimeIsEnv)) {
+
+            } else {
+                System.out.println("No");
+                return;
+            }
+/*
             Map<Boolean,Boolean> booleanMap = new HashMap<>();
             booleanMap.put(timeIsEnv, sumXYIsEnv);
 
@@ -89,7 +96,7 @@ public class ABC086CTraveling {
                     System.out.println("No");
                     return;
                 }
-            }
+            }*/
 
             // 前回の値の一時保存
             tmpTime = time;
@@ -97,7 +104,7 @@ public class ABC086CTraveling {
 
             tmpTimeIsEnv = (time % 2 == 0);
             tmpSumXYIsEnv = (sumXY % 2 == 0);
-            tmpBooleanMap.put(tmpTimeIsEnv, tmpSumXYIsEnv);
+//            tmpBooleanMap.put(tmpTimeIsEnv, tmpSumXYIsEnv);
         }
 
         System.out.println("Yes");
